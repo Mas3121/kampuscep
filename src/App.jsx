@@ -55,11 +55,49 @@ function App() {
   bitis: "12:30"
 },
 ]
+const sinavlar = [
+{
+  ders: "Devreler ve Elektronik",
+  tarih: "2026-10-15",
+  saat: "10.00"
+},
+{
+  ders: "Diferansiyel Denklemler",
+  tarih: "2026-10-18",
+  saat: "10.00"
+},
+]
     
   return (
     <div>
       <h1>KampüsCep</h1>
       <p>Üniversite hayatını tek yerde takip et.</p>
+      <h2>Sınavlar</h2>
+      {sinavlar.map((sinav) => {
+         const tarih = new Date(sinav.tarih)
+        const ay = tarih.getMonth()
+         const aylar = [
+  "Ocak",
+  "Şubat",
+  "Mart",
+  "Nisan",
+  "Mayıs",
+  "Haziran",
+  "Temmuz",
+  "Ağustos",
+  "Eylül",
+  "Ekim",
+  "Kasım",
+  "Aralık"
+]
+         const ayAdi = aylar[ay]
+         return (
+<div className="sinav">
+          <p className="ders">{sinav.ders}</p>
+          <p style={{ color: "#666", fontSize:"14px"}}>{tarih.getDate()} {ayAdi} - {sinav.saat}</p>
+        </div>
+         )
+})}
       {["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"].map((gun) => (
         <div className="gun">
           <h2>{gun}</h2>
@@ -68,9 +106,6 @@ function App() {
           .map((ders) => (
       <div>
       <p className="ders">{ders.ders}</p>
-      <p style={{ color: "#666", fontSize: "14px" }}>
-  {ders.baslangic} - {ders.bitis}
-</p>
       </div>
       ))}
     </div>
