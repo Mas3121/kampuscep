@@ -67,6 +67,7 @@ const sinavlar = [
   saat: "10.00"
 },
 ]
+sinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
     
   return (
     <div>
@@ -75,6 +76,11 @@ const sinavlar = [
       <h2>Sınavlar</h2>
       {sinavlar.map((sinav) => {
          const tarih = new Date(sinav.tarih)
+         const bugun = new Date()
+         const kalan = tarih - bugun
+         const KalanGun = kalan / (24 * 60 * 60 * 1000)
+         const tamGun = Math.floor(KalanGun)
+         console.log(tamGun)
         const ay = tarih.getMonth()
          const aylar = [
   "Ocak",
@@ -94,7 +100,7 @@ const sinavlar = [
          return (
 <div className="sinav">
           <p className="ders">{sinav.ders}</p>
-          <p style={{ color: "#666", fontSize:"14px"}}>{tarih.getDate()} {ayAdi} - {sinav.saat}</p>
+          <p style={{ color: "#666", fontSize:"14px"}}>{tarih.getDate()} {ayAdi} - {sinav.saat} - {tamGun} gün kaldı</p>
         </div>
          )
 })}
