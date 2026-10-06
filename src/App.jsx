@@ -1,5 +1,7 @@
 import './App.css'
+import { useState } from 'react'
 function App() {
+  const [aktifSayfa, setAktifSayfa] = useState("ana")
   const dersler = [
   { gun: "Pazartesi",
     ders: "Devreler ve Elektronik",
@@ -76,6 +78,7 @@ const duyurular = [
     aciklama: "Yeni duyuru yayınlandı"
   },
 ]
+duyurular.sort((a,b) => new Date(b.tarih) - new Date(a.tarih))
 const gelecekSinavlar = sinavlar.filter((sinav) => new Date(sinav.tarih) >= new Date())
 gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
     
@@ -83,7 +86,16 @@ gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
     <div>
       <h1>KampüsCep</h1>
       <p>Üniversite hayatını tek yerde takip et.</p>
-      <h2>Sınavlar</h2>
+      <nav>
+        <button onClick={() => setAktifSayfa("ana")}>Ana Sayfa</button>
+        <button onClick={() => setAktifSayfa("dersler")}>Ders Programı</button>
+        <button onClick={() => setAktifSayfa("sinavlar")}>Sınavlar</button>
+        <button onClick={() => setAktifSayfa("duyurular")}>Duyurular</button>
+      </nav>
+      {aktifSayfa === "sinavlar" && (
+        <>
+        <h2>Sınavlar</h2>
+        
       {gelecekSinavlar.map((sinav) => {
          const tarih = new Date(sinav.tarih)
          const bugun = new Date()
@@ -122,20 +134,44 @@ gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
         </div>
          )
 })}
-        <h2>Duyurular</h2>
+</>
+      )}
+        {aktifSayfa === "duyurular" && (
+          <>
+          <h2>Duyurular</h2>
         {duyurular.map((duyuru) => {
           const tarih = new Date(duyuru.tarih)
+          const ay = tarih.getMonth()
+          const aylar = [
+  "Ocak",
+  "Şubat",
+  "Mart",
+  "Nisan",
+  "Mayıs",
+  "Haziran",
+  "Temmuz",
+  "Ağustos",
+  "Eylül",
+  "Ekim",
+  "Kasım",
+  "Aralık"
+]
+          const ayAdi = aylar[ay]
 
           return (
             <div className="duyuru">
           
         
             <p className="duyuru-baslik">{duyuru.baslik}</p>
-            <p>{duyuru.tarih}</p>
+            <p>{tarih.getDate()} {ayAdi}</p>
             <p>{duyuru.aciklama}</p>
           </div>
   )
 })}
+</>
+        )}
+        {aktifSayfa === "dersler" && (
+          <>
       {["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"].map((gun) => (
         <div className="gun">
           <h2>{gun}</h2>
@@ -148,8 +184,9 @@ gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
       ))}
     </div>
   ))}
+  </>
+        )}
   </div>
   )
 }
-
 export default App
