@@ -89,18 +89,15 @@ gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
     <div>
       <h1>KampüsCep</h1>
       <p>Üniversite hayatını tek yerde takip et.</p>
-      <nav>
-        <button onClick={() => setAktifSayfa("ana")}>Ana Sayfa</button>
-        <button onClick={() => setAktifSayfa("dersler")}>Ders Programı</button>
-        <button onClick={() => setAktifSayfa("sinavlar")}>Sınavlar</button>
-        <button onClick={() => setAktifSayfa("duyurular")}>Duyurular</button>
-      </nav>
       {aktifSayfa === "ana" && (
-        <AnaSayfa dersler={dersler} />
+        <AnaSayfa
+        dersler={dersler}
+        setAktifSayfa={setAktifSayfa}
+         />
       )}
       {aktifSayfa === "sinavlar" && (
         <Sinavlar sinavlar={gelecekSinavlar} />
-      )}
+       )}
 
         {aktifSayfa === "duyurular" && (
           <Duyurular duyurular={duyurular} />
