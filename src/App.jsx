@@ -96,16 +96,14 @@ gelecekSinavlar.sort((a,b) => new Date(a.tarih) - new Date(b.tarih))
         <button onClick={() => setAktifSayfa("duyurular")}>Duyurular</button>
       </nav>
       {aktifSayfa === "ana" && (
-        <AnaSayfa />
+        <AnaSayfa dersler={dersler} />
       )}
       {aktifSayfa === "sinavlar" && (
         <Sinavlar sinavlar={gelecekSinavlar} />
       )}
 
         {aktifSayfa === "duyurular" && (
-          <>
           <Duyurular duyurular={duyurular} />
-</>
         )}
         {aktifSayfa === "dersler" && (
           <>
