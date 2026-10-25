@@ -80,6 +80,11 @@ const duyurular = [
     tarih: "2026-10-04",
     aciklama: "Yeni duyuru yayınlandı"
   },
+  {
+    baslik: "Bilgisayar Mühendisliği Sınavlar Duyurusu",
+    tarih: "2026-11-02",
+    aciklama: "Sınav tarihleri güncellendi"
+  },
 ]
 duyurular.sort((a,b) => new Date(b.tarih) - new Date(a.tarih))
 const gelecekSinavlar = sinavlar.filter((sinav) => new Date(sinav.tarih) >= new Date())
